@@ -26,12 +26,12 @@ const signup = async (req, res) => {
         const refreshToken = jwt.sign({ email }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
 
         // Store the refresh token in the database
-        const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 1 day
+        const expiresAt = new Date(Date.now() +  24 * 60 * 60 * 1000); // 1 day
         await pool.query('INSERT INTO refresh_tokens (user_email, refresh_token, expires_at) VALUES ($1, $2, $3)', 
             [email, refreshToken, expiresAt]);
 
         // Set the refresh token as an HTTP-only cookie
-        res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'strict', maxAge: 24 * 60 * 60 * 1000 });
+        res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'strict', maxAge: 24 * 60 * 60 * 1000 });
 
         // Respond with the access token
         res.status(201).json({ accessToken });
