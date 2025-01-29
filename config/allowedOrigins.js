@@ -1,5 +1,5 @@
 const allowedOrigins = [
-    'https://www.yoursite.com',
+    'https://muneeb-almoliky-task-manager-app.vercel.app',
     'http://localhost:5173',
     'http://localhost:3000'
 ];
