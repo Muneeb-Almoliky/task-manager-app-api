@@ -69,7 +69,7 @@ const refreshTokenController = async (req, res) => {
             res.cookie('jwt', newRefreshToken, {
                 httpOnly: true,
                 secure: true,
-                sameSite: 'strict',
+                sameSite: 'none',
                 maxAge: 24 * 60 * 60 * 1000
             });
 

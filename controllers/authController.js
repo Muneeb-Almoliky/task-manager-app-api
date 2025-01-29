@@ -31,7 +31,7 @@ const signup = async (req, res) => {
             [email, refreshToken, expiresAt]);
 
         // Set the refresh token as an HTTP-only cookie
-        res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'strict', maxAge: 24 * 60 * 60 * 1000 });
+        res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 24 * 60 * 60 * 1000 });
 
         // Respond with the access token
         res.status(201).json({ accessToken });
@@ -74,7 +74,7 @@ const login = async (req, res) => {
             [email, refreshToken, expiresAt]);
 
         // Set the refresh token as an HTTP-only cookie
-        res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'strict', maxAge: 24 * 60 * 60 * 1000 });
+        res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 24 * 60 * 60 * 1000 });
 
         // Respond with the access token
         res.status(200).json({ accessToken });
@@ -102,7 +102,7 @@ const logout = async (req, res) => {
         res.clearCookie('jwt', {
             httpOnly: true,
             secure: true,
-            sameSite: 'strict',
+            sameSite: 'none',
             path: '/'
         });
 
